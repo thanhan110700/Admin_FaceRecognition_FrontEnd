@@ -1,0 +1,82 @@
+{
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "typescript.preferences.quoteStyle": "single",
+  "javascript.preferences.quoteStyle": "single",
+  "prettier.singleQuote": true,
+  "prettier.jsxSingleQuote": true,
+  "prettier.semi": false,
+  "diffEditor.ignoreTrimWhitespace": false,
+  "html.format.endWithNewline": true,
+  // "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[scss]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[vue]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "workbench.statusBar.visible": true,
+  "editor.renderWhitespace": "none",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "editor.renderControlCharacters": false,
+  "files.associations": {
+    "*.vue": "vue",
+    "*.jsx": "javascriptreact",
+    "*.blade.php": "html",
+    // "*.module": "php"
+  },
+  "editor.minimap.enabled": false,
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "vetur.format.options.tabSize": 4,
+  "editor.detectIndentation": false,
+  "[php]": {
+    "editor.tabSize": 4,
+    "editor.insertSpaces": true,
+    "editor.detectIndentation": false,
+    // "editor.defaultFormatter": "bmewburn.vscode-intelephense-client"
+  },
+  "gitlens.advanced.messages": {
+    "suppressCommitNotFoundWarning": true
+  },
+  "tabnine.experimentalAutoImports": true,
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact"
+  },
+  "editor.tabSize": 2,
+  "editor.fontSize": 16,
+  "files.autoSave": "off",
+  "editor.wordWrap": "on",
+  "workbench.iconTheme": "material-icon-theme",
+  "liveServer.settings.donotShowInfoMsg": true,
+  "editor.cursorBlinking": "expand",
+  "git.autofetch": true,
+  "workbench.colorTheme": "Monokai",
+  "terminal.integrated.fontSize": 14,
+  "editor.formatOnPaste": true,
+  "todo-tree.general.enableFileWatcher": true,
+  "editor.formatOnSave": true
+}
