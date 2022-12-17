@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { NavLink, useLocation } from 'react-router-dom'
+import { NavLink, useLocation, useNavigate } from 'react-router-dom'
+import state from '../utils/localStorage'
 
 import SidebarLinkGroup from './SidebarLinkGroup'
 
 function Sidebar({ sidebarOpen, setSidebarOpen }) {
   const location = useLocation()
+  const navigate = useNavigate()
   const { pathname } = location
 
   const trigger = useRef(null)
@@ -42,13 +44,19 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
   })
 
   useEffect(() => {
-    localStorage.setItem('sidebar-expanded', sidebarExpanded)
+    state.set('sidebar-expanded', sidebarExpanded)
     if (sidebarExpanded) {
       document.querySelector('body').classList.add('sidebar-expanded')
     } else {
       document.querySelector('body').classList.remove('sidebar-expanded')
     }
   }, [sidebarExpanded])
+
+  const handelLogOut = () => {
+    state.remove('token')
+    state.remove('user')
+    navigate('/login')
+  }
 
   return (
     <div>
@@ -266,7 +274,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                 }}
               </SidebarLinkGroup>
               {/* Community */}
-              <SidebarLinkGroup activecondition={pathname.includes('users')}>
+              <SidebarLinkGroup activecondition={pathname.includes('user')}>
                 {(handleClick, open) => {
                   return (
                     <React.Fragment>
@@ -690,7 +698,10 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                         }}
                       >
                         <div className='flex items-center justify-between'>
-                          <div className='flex items-center'>
+                          <div
+                            onClick={handelLogOut}
+                            className='flex items-center'
+                          >
                             <svg
                               className='shrink-0 h-6 w-6'
                               viewBox='0 0 24 24'
