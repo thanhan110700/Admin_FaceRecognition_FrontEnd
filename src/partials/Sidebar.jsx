@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { NavLink, useLocation, useNavigate } from 'react-router-dom'
+import { URL } from '../config/constants'
 import state from '../utils/localStorage'
 
 import SidebarLinkGroup from './SidebarLinkGroup'
@@ -426,11 +427,11 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                           <li className='mb-1 last:mb-0'>
                             <NavLink
                               end
-                              to='/'
+                              to={URL.LIST_USER_ATTENDANCE}
                               className='block text-slate-400 hover:text-slate-200 transition duration-150 truncate'
                             >
                               <span className='text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200'>
-                                Kanban
+                                List User
                               </span>
                             </NavLink>
                           </li>
@@ -673,53 +674,6 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                             </NavLink>
                           </li>
                         </ul>
-                      </div>
-                    </React.Fragment>
-                  )
-                }}
-              </SidebarLinkGroup>
-            </ul>
-          </div>
-          {/* More group */}
-          <div>
-            <ul className='mt-3'>
-              {/* Authentication */}
-              <SidebarLinkGroup>
-                {(handleClick, open) => {
-                  return (
-                    <React.Fragment>
-                      <div
-                        href='#0'
-                        className={`block text-slate-200 hover:text-white hover:cursor-pointer truncate transition duration-150 ${
-                          open && 'hover:text-slate-200'
-                        }`}
-                        onClick={(e) => {
-                          console.log('clicked')
-                        }}
-                      >
-                        <div className='flex items-center justify-between'>
-                          <div
-                            onClick={handelLogOut}
-                            className='flex items-center'
-                          >
-                            <svg
-                              className='shrink-0 h-6 w-6'
-                              viewBox='0 0 24 24'
-                            >
-                              <path
-                                className='fill-current text-slate-600'
-                                d='M8.07 16H10V8H8.07a8 8 0 110 8z'
-                              />
-                              <path
-                                className='fill-current text-slate-400'
-                                d='M15 12L8 6v5H0v2h8v5z'
-                              />
-                            </svg>
-                            <span className='text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200'>
-                              Log-out
-                            </span>
-                          </div>
-                        </div>
                       </div>
                     </React.Fragment>
                   )

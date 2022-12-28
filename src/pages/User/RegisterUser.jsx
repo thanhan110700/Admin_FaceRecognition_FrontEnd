@@ -1,57 +1,34 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import Header from '../../partials/Header'
-import { getUser, getUserById, updateUser } from '../../api/services/AuthUser'
+import {
+  getUser,
+  getUserById,
+  register,
+  updateUser,
+} from '../../api/services/AuthUser'
 import { OverlaySpinner } from '../../components/OverlaySpinner'
 import { AiFillDelete, AiFillSetting } from 'react-icons/ai'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'react-hot-toast'
 import get from 'lodash/get'
-import Select from '../../components/Select'
 import Input from '../../components/Input'
+import Select from '../../components/Select'
 
-function EditUser() {
+function RegisterUser() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
-  const { id } = useParams()
-  const [loading, setLoading] = useState(true)
+  const navigate = useNavigate()
+  const [loading, setLoading] = useState(false)
   const [dataUser, setDataUser] = useState({
     username: '',
     password: '',
     re_password: '',
     email: '',
-    user_code: '',
     name: '',
     birthday: '',
     department_id: 1,
     position_id: 1,
     total_amount: '',
   })
-
-  const onChangeData = (e) => {
-    setDataUser({
-      ...dataUser,
-      [e.target.name]: e.target.value,
-    })
-  }
-
-  useEffect(() => {
-    getData(id)
-  }, []) // triggered on route change
-
-  const getData = (id) => {
-    getUserById(id)
-      .then(({ data }) => {
-        setDataUser({
-          ...data,
-          password: '',
-        })
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-      .finally(() => {
-        setLoading(false)
-      })
-  }
   const departments = useMemo(
     () => [
       { value: 1, name: 'Quản lý nhân sự' },
@@ -71,12 +48,19 @@ function EditUser() {
     []
   )
 
-  const handleEdit = (e) => {
+  const onChangeData = (e) => {
+    setDataUser({
+      ...dataUser,
+      [e.target.name]: e.target.value,
+    })
+  }
+  const handleRegister = (e) => {
     setLoading(true)
     e.preventDefault()
-    updateUser(id, dataUser)
+    register(dataUser)
       .then(() => {
-        toast.success('Update Success')
+        toast.success('Register Success')
+        navigate(`/user/list`)
       })
       .catch((error) => {
         const err = get(error, 'response.data.errors')
@@ -101,16 +85,15 @@ function EditUser() {
               <label>
                 <div className='flex items-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5'>
                   <p className='text-center text-3xl font-semibold mx-4 mb-2'>
-                    EDIT USER
+                    REGISTER USER
                   </p>
                 </div>
               </label>
-              <div className='flex flex-wrap -mx-3 mb-2'>
+              <div className='flex flex-wrap -mx-3 mb-2 '>
                 <div className='w-full md:w-full px-3 mb-2 md:mb-0'>
                   <Input
                     label='Username'
                     type='text'
-                    disabled
                     value={dataUser.username}
                     name='username'
                     placeholder='Username'
@@ -148,7 +131,6 @@ function EditUser() {
                     label='Name'
                     type='text'
                     name='name'
-                    required
                     value={dataUser.name}
                     placeholder='Name'
                     onChange={(e) => onChangeData(e)}
@@ -158,20 +140,9 @@ function EditUser() {
               <div className='flex flex-wrap -mx-3 mb-2'>
                 <div className='w-full md:w-full px-3 mb-2 md:mb-0'>
                   <Input
-                    label='User Code'
-                    type='text'
-                    disabled
-                    name='user_code'
-                    value={dataUser.user_code}
-                    onChange={(e) => onChangeData(e)}
-                  />
-                </div>
-              </div>
-              <div className='flex flex-wrap -mx-3 mb-2'>
-                <div className='w-full md:w-full px-3 mb-2 md:mb-0'>
-                  <Input
                     label='Birthday'
                     type='date'
+                    required
                     name='birthday'
                     value={dataUser.birthday}
                     onChange={(e) => onChangeData(e)}
@@ -199,12 +170,12 @@ function EditUser() {
                     onChange={(e) => onChangeData(e)}
                   />
                 </div>
-                <div className='flex w-full mt-5 justify-end'>
+                <div className='flex w-full mt-5 justify-end px-5'>
                   <button
                     className='flex px-10 py-2 bg-green-500 text-white rounded-sm float-right'
-                    onClick={handleEdit}
+                    onClick={handleRegister}
                   >
-                    Save
+                    Register
                   </button>
                 </div>
               </div>
@@ -216,4 +187,4 @@ function EditUser() {
   )
 }
 
-export default EditUser
+export default RegisterUser

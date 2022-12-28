@@ -1,7 +1,7 @@
 import Http from '../http'
 
-export const fetchAttendance = async (payload) => {
-  const { data } = await Http.get(`/attendances`, { params: payload })
+export const fetchAttendanceByUserId = async (id, payload) => {
+  const { data } = await Http.get(`/attendances/${id}`, { params: payload })
   return data
 }
 
