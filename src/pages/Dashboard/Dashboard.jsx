@@ -29,7 +29,13 @@ function Dashboard() {
               <hr className='mb-2' />
               <div className='flex justify-around '>
                 <Card className='bg-green-300'>List User</Card>
-                <Card className='bg-red-300'>Register</Card>
+              </div>
+            </div>
+            <div className='flex flex-col mb-10'>
+              <label className='font-bold mb-1 text-xl ml-10'>Message</label>
+              <hr className='mb-2' />
+              <div className='flex justify-around'>
+                <Card className='bg-pink-300'>Message</Card>
               </div>
             </div>
           </div>

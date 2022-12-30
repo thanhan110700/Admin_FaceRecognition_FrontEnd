@@ -6,4 +6,5 @@ export const URL = {
   REGISTER_USER: '/user/register',
   LIST_USER_ATTENDANCE: 'attendance/list',
   ATTENDANCE_DETAIL: 'attendance/list/:id',
+  MESSAGE: 'messages',
 }

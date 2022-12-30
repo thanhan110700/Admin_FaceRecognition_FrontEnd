@@ -246,28 +246,6 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                               </span>
                             </NavLink>
                           </li>
-                          <li className='mb-1 last:mb-0'>
-                            <NavLink
-                              end
-                              to='/'
-                              className='block text-slate-400 hover:text-slate-200 transition duration-150 truncate'
-                            >
-                              <span className='text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200'>
-                                Analytics
-                              </span>
-                            </NavLink>
-                          </li>
-                          <li className='mb-1 last:mb-0'>
-                            <NavLink
-                              end
-                              to='/'
-                              className='block text-slate-400 hover:text-slate-200 transition duration-150 truncate'
-                            >
-                              <span className='text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200'>
-                                Fintech
-                              </span>
-                            </NavLink>
-                          </li>
                         </ul>
                       </div>
                     </React.Fragment>
@@ -442,7 +420,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                               className='block text-slate-400 hover:text-slate-200 transition duration-150 truncate'
                             >
                               <span className='text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200'>
-                                List
+                                Salary
                               </span>
                             </NavLink>
                           </li>
@@ -460,7 +438,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
               >
                 <NavLink
                   end
-                  to='/'
+                  to={URL.MESSAGE}
                   className={`block text-slate-200 hover:text-white truncate transition duration-150 ${
                     pathname.includes('messages') && 'hover:text-slate-200'
                   }`}
@@ -483,12 +461,6 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                       </svg>
                       <span className='text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200'>
                         Messages
-                      </span>
-                    </div>
-                    {/* Badge */}
-                    <div className='flex flex-shrink-0 ml-2'>
-                      <span className='inline-flex items-center justify-center h-5 text-xs font-medium text-white bg-indigo-500 px-2 rounded'>
-                        4
                       </span>
                     </div>
                   </div>
@@ -528,157 +500,6 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                   </div>
                 </NavLink>
               </li>
-              {/* Utility */}
-              <SidebarLinkGroup activecondition={pathname.includes('utility')}>
-                {(handleClick, open) => {
-                  return (
-                    <React.Fragment>
-                      <a
-                        href='#0'
-                        className={`block text-slate-200 hover:text-white truncate transition duration-150 ${
-                          pathname.includes('utility') && 'hover:text-slate-200'
-                        }`}
-                        onClick={(e) => {
-                          e.preventDefault()
-                          sidebarExpanded
-                            ? handleClick()
-                            : setSidebarExpanded(true)
-                        }}
-                      >
-                        <div className='flex items-center justify-between'>
-                          <div className='flex items-center'>
-                            <svg
-                              className='shrink-0 h-6 w-6'
-                              viewBox='0 0 24 24'
-                            >
-                              <circle
-                                className={`fill-current text-slate-400 ${
-                                  pathname.includes('utility') &&
-                                  'text-indigo-300'
-                                }`}
-                                cx='18.5'
-                                cy='5.5'
-                                r='4.5'
-                              />
-                              <circle
-                                className={`fill-current text-slate-600 ${
-                                  pathname.includes('utility') &&
-                                  'text-indigo-500'
-                                }`}
-                                cx='5.5'
-                                cy='5.5'
-                                r='4.5'
-                              />
-                              <circle
-                                className={`fill-current text-slate-600 ${
-                                  pathname.includes('utility') &&
-                                  'text-indigo-500'
-                                }`}
-                                cx='18.5'
-                                cy='18.5'
-                                r='4.5'
-                              />
-                              <circle
-                                className={`fill-current text-slate-400 ${
-                                  pathname.includes('utility') &&
-                                  'text-indigo-300'
-                                }`}
-                                cx='5.5'
-                                cy='18.5'
-                                r='4.5'
-                              />
-                            </svg>
-                            <span className='text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200'>
-                              Utility
-                            </span>
-                          </div>
-                          {/* Icon */}
-                          <div className='flex shrink-0 ml-2'>
-                            <svg
-                              className={`w-3 h-3 shrink-0 ml-1 fill-current text-slate-400 ${
-                                open && 'rotate-180'
-                              }`}
-                              viewBox='0 0 12 12'
-                            >
-                              <path d='M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z' />
-                            </svg>
-                          </div>
-                        </div>
-                      </a>
-                      <div className='lg:hidden lg:sidebar-expanded:block 2xl:block'>
-                        <ul className={`pl-9 mt-1 ${!open && 'hidden'}`}>
-                          <li className='mb-1 last:mb-0'>
-                            <NavLink
-                              end
-                              to='/'
-                              className='block text-slate-400 hover:text-slate-200 transition duration-150 truncate'
-                            >
-                              <span className='text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200'>
-                                Changelog
-                              </span>
-                            </NavLink>
-                          </li>
-                          <li className='mb-1 last:mb-0'>
-                            <NavLink
-                              end
-                              to='/'
-                              className='block text-slate-400 hover:text-slate-200 transition duration-150 truncate'
-                            >
-                              <span className='text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200'>
-                                Roadmap
-                              </span>
-                            </NavLink>
-                          </li>
-                          <li className='mb-1 last:mb-0'>
-                            <NavLink
-                              end
-                              to='/'
-                              className='block text-slate-400 hover:text-slate-200 transition duration-150 truncate'
-                            >
-                              <span className='text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200'>
-                                FAQs
-                              </span>
-                            </NavLink>
-                          </li>
-                          <li className='mb-1 last:mb-0'>
-                            <NavLink
-                              end
-                              to='/'
-                              className='block text-slate-400 hover:text-slate-200 transition duration-150 truncate'
-                            >
-                              <span className='text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200'>
-                                Empty State
-                              </span>
-                            </NavLink>
-                          </li>
-                          <li className='mb-1 last:mb-0'>
-                            <NavLink
-                              end
-                              to='/'
-                              className='block text-slate-400 hover:text-slate-200 transition duration-150 truncate'
-                            >
-                              <span className='text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200'>
-                                404
-                              </span>
-                            </NavLink>
-                          </li>
-                          <li className='mb-1 last:mb-0'>
-                            <NavLink
-                              end
-                              to='/'
-                              className='block text-slate-400 hover:text-slate-200 transition duration-150 truncate'
-                            >
-                              <span className='text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200'>
-                                Knowledge Base
-                              </span>
-                            </NavLink>
-                          </li>
-                        </ul>
-                      </div>
-                    </React.Fragment>
-                  )
-                }}
-              </SidebarLinkGroup>
             </ul>
           </div>
         </div>

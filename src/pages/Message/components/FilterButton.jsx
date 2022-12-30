@@ -1,9 +1,54 @@
-import React, { useState, useRef, useEffect } from 'react'
-import Select from '../../components/Select'
-import Transition from '../../utils/Transition'
+import React, { useState, useRef, useEffect, useMemo } from 'react'
+import Input from '../../../components/Input'
+import Select from '../../../components/Select'
+import Transition from '../../../utils/Transition'
 
-function FilterButton() {
+function FilterButton({ setPayload }) {
   const [dropdownOpen, setDropdownOpen] = useState(false)
+  const [dataBackup, setDataBackup] = useState({
+    read: 2,
+    orderType: 'desc',
+    created_at: '',
+  })
+  const reads = useMemo(
+    () => [
+      {
+        value: 2,
+        name: 'All',
+      },
+      {
+        value: 1,
+        name: 'Read',
+      },
+      {
+        value: 0,
+        name: 'Unread',
+      },
+    ],
+    []
+  )
+  const orderTypes = useMemo(
+    () => [
+      {
+        value: 'desc',
+        name: 'Descending',
+      },
+      {
+        value: 'asc',
+        name: 'Ascending',
+      },
+    ],
+    []
+  )
+
+  const onChange = (e) => {
+    setDataBackup({ ...dataBackup, [e.target.name]: e.target.value })
+  }
+
+  const onClick = () => {
+    setDropdownOpen(false)
+    setPayload(dataBackup)
+  }
 
   const trigger = useRef(null)
   const dropdown = useRef(null)
@@ -65,7 +110,31 @@ function FilterButton() {
           </div>
           <ul className='mb-4'>
             <li className='py-1 px-3'>
-              <label className='flex items-center'></label>
+              <Select
+                label='Read'
+                data={reads}
+                value={dataBackup.read}
+                name='read'
+                onChange={onChange}
+              />
+            </li>
+            <li className='py-1 px-3'>
+              <Select
+                label='Order Time'
+                data={orderTypes}
+                value={dataBackup.orderType}
+                name='orderType'
+                onChange={onChange}
+              />
+            </li>
+            <li className='py-1 px-3'>
+              <Input
+                label='Date'
+                type='date'
+                value={dataBackup.created_at}
+                name='created_at'
+                onChange={onChange}
+              />
             </li>
           </ul>
           <div className='py-2 px-3 border-t border-slate-200 bg-slate-50'>
@@ -73,7 +142,7 @@ function FilterButton() {
               <li>
                 <button
                   className='btn-xs bg-indigo-500 hover:bg-indigo-600 text-white'
-                  onClick={() => setDropdownOpen(false)}
+                  onClick={onClick}
                   onBlur={() => setDropdownOpen(false)}
                 >
                   Apply

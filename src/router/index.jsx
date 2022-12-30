@@ -13,6 +13,7 @@ import { LoginLayout } from '../layouts/LoginLayout'
 import DetailAttendance from '../pages/Attendance/DetailAttendance'
 import ListUserAttendance from '../pages/Attendance/ListUser'
 import Dashboard from '../pages/Dashboard/Dashboard'
+import { Message } from '../pages/Message'
 import EditUser from '../pages/User/EditUser'
 import ListUser from '../pages/User/ListUser'
 import RegisterUser from '../pages/User/RegisterUser'
@@ -32,6 +33,7 @@ const Router = () => {
           element={<ListUserAttendance />}
         />
         <Route path={URL.ATTENDANCE_DETAIL} element={<DetailAttendance />} />
+        <Route path={URL.MESSAGE} element={<Message />} />
       </Route>
       <Route path='/login' element={<LoginLayout />} />
     </Routes>

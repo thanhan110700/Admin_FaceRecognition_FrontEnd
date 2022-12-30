@@ -2,22 +2,32 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { fetchAttendanceByUserId } from '../../api/services/Attendance'
 import Input from '../../components/Input'
+import Modal from '../../components/Modal'
 import { OverlaySpinner } from '../../components/OverlaySpinner'
 import Select from '../../components/Select'
 import Header from '../../partials/Header'
+import Form from './components/Form'
 
 export default function DetailAttendance() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [loading, setLoading] = useState(true)
+  const [isOpen, setIsOpen] = useState(false)
+  const { id } = useParams()
+
   const [attendances, setAttendances] = useState([])
+  const [dataUpdate, setDataUpdate] = useState({
+    id: '',
+    user_id: id,
+    check_in: '',
+    check_out: '',
+  })
   const [totalTime, setTotalTime] = useState([])
   const [totalSalary, setTotalSalary] = useState([])
   const [payload, setPayload] = useState({
     month: new Date(),
   })
   const navigate = useNavigate()
-  const { id } = useParams()
-  useEffect(() => {
+  const getData = () => {
     fetchAttendanceByUserId(id, payload)
       .then((res) => {
         const { data, total_salary, total_time } = res
@@ -26,6 +36,9 @@ export default function DetailAttendance() {
         setTotalSalary(total_salary)
       })
       .finally(() => setLoading(false))
+  }
+  useEffect(() => {
+    getData()
   }, [payload])
 
   const changePayload = (e) => {
@@ -101,6 +114,17 @@ export default function DetailAttendance() {
                 {attendances.map((item, index) => (
                   <tr
                     key={item.id}
+                    onClick={() => {
+                      setDataUpdate({
+                        ...dataUpdate,
+                        id: item.id,
+                        date: item.date,
+                        check_in: item.check_in,
+                        check_out: item.check_out,
+                        is_late: item.is_late,
+                      })
+                      setIsOpen(true)
+                    }}
                     className='bg-white border-b dark:bg-gray-800 dark:border-gray-700 transition duration-300 ease-in-out hover:bg-[#b1b3b9]'
                   >
                     <td className='px-6 py-4 whitespace-nowrap text-sm font-medium '>
@@ -155,6 +179,16 @@ export default function DetailAttendance() {
               </tbody>
             </table>
           </div>
+          <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
+            <Form
+              getData={getData}
+              dataUpdate={dataUpdate}
+              setDataUpdate={setDataUpdate}
+              setIsOpen={setIsOpen}
+              setLoading={setLoading}
+              loading={loading}
+            />
+          </Modal>
         </main>
       </div>
     </div>

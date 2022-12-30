@@ -25,7 +25,7 @@ function BaseLayout() {
       <OverlaySpinner open={loading} />
       <div className='flex h-screen overflow-hidden'>
         <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-        <main className='w-full'>
+        <main className='w-full bg-white'>
           <Outlet />
         </main>
       </div>
