@@ -50,12 +50,10 @@ export default function DetailAttendance() {
   }
 
   return (
-    <div className='flex h-screen w-full overflow-hidden'>
-      <OverlaySpinner open={loading} />
+    <>
       {/* Content area */}
       <div className='relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden'>
         {/*  Site header */}
-        <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
         <main>
           <div className='p-5'>
             <div className='float-right mb-5'>
@@ -202,6 +200,6 @@ export default function DetailAttendance() {
           </Modal>
         </main>
       </div>
-    </div>
+    </>
   )
 }

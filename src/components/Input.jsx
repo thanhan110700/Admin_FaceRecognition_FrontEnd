@@ -12,7 +12,7 @@ export default function Input({
   required,
 }) {
   return (
-    <>
+    <div>
       {label && (
         <label
           className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
@@ -31,6 +31,6 @@ export default function Input({
         placeholder={placeholder}
         onChange={(e) => onChange(e)}
       />
-    </>
+    </div>
   )
 }

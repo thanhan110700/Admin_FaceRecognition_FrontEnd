@@ -72,12 +72,11 @@ function RegisterUser() {
   }
 
   return (
-    <div className='flex h-screen w-full overflow-hidden'>
+    <>
       <OverlaySpinner open={loading} />
       {/* Content area */}
       <div className='relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden'>
         {/*  Site header */}
-        <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
 
         <main>
           <div className='flex justify-center px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto'>
@@ -85,7 +84,7 @@ function RegisterUser() {
               <label>
                 <div className='flex items-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5'>
                   <p className='text-center text-3xl font-semibold mx-4 mb-2'>
-                    REGISTER USER
+                    CREATE USER
                   </p>
                 </div>
               </label>
@@ -175,7 +174,7 @@ function RegisterUser() {
                     className='flex px-10 py-2 bg-green-500 text-white rounded-sm float-right'
                     onClick={handleRegister}
                   >
-                    Register
+                    Create
                   </button>
                 </div>
               </div>
@@ -183,7 +182,7 @@ function RegisterUser() {
           </div>
         </main>
       </div>
-    </div>
+    </>
   )
 }
 

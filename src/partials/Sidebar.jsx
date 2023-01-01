@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import { NavLink, useLocation, useNavigate } from 'react-router-dom'
 import { URL } from '../config/constants'
 import state from '../utils/localStorage'
+import sessionState from '../utils/sessionState'
 
 import SidebarLinkGroup from './SidebarLinkGroup'
 
@@ -18,6 +19,9 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
     storedSidebarExpanded === null ? false : storedSidebarExpanded === 'true'
   )
 
+  const clearDataSearch = () => {
+    sessionState.clear()
+  }
   // close on click outside
   useEffect(() => {
     const clickHandler = ({ target }) => {
@@ -52,12 +56,6 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
       document.querySelector('body').classList.remove('sidebar-expanded')
     }
   }, [sidebarExpanded])
-
-  const handelLogOut = () => {
-    state.remove('token')
-    state.remove('user')
-    navigate('/login')
-  }
 
   return (
     <div>
@@ -97,7 +95,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
             </svg>
           </button>
           {/* Logo */}
-          <NavLink end to='/' className='block'>
+          <NavLink onClick={clearDataSearch} end to='/' className='block'>
             <svg
               className='inline-block'
               width='32'
@@ -234,6 +232,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                         <ul className={`pl-9 mt-1 ${!open && 'hidden'}`}>
                           <li className='mb-1 last:mb-0'>
                             <NavLink
+                              onClick={clearDataSearch}
                               end
                               to='/'
                               className={({ isActive }) =>
@@ -309,23 +308,25 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                         <ul className={`pl-9 mt-1 ${!open && 'hidden'}`}>
                           <li className='mb-1 last:mb-0'>
                             <NavLink
+                              onClick={clearDataSearch}
                               end
                               to='/user/list'
                               className='block text-slate-400 hover:text-slate-200 transition duration-150 truncate'
                             >
                               <span className='text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200'>
-                                Users - List
+                                Users
                               </span>
                             </NavLink>
                           </li>
                           <li className='mb-1 last:mb-0'>
                             <NavLink
+                              onClick={clearDataSearch}
                               end
                               to='/user/register'
                               className='block text-slate-400 hover:text-slate-200 transition duration-150 truncate'
                             >
                               <span className='text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200'>
-                                Users - Register
+                                Create User
                               </span>
                             </NavLink>
                           </li>
@@ -404,6 +405,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                         <ul className={`pl-9 mt-1 ${!open && 'hidden'}`}>
                           <li className='mb-1 last:mb-0'>
                             <NavLink
+                              onClick={clearDataSearch}
                               end
                               to={URL.LIST_USER_ATTENDANCE}
                               className='block text-slate-400 hover:text-slate-200 transition duration-150 truncate'
@@ -415,6 +417,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                           </li>
                           <li className='mb-1 last:mb-0'>
                             <NavLink
+                              onClick={clearDataSearch}
                               end
                               to={URL.ATTENDANCE_SALARY}
                               className='block text-slate-400 hover:text-slate-200 transition duration-150 truncate'
@@ -437,6 +440,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                 }`}
               >
                 <NavLink
+                  onClick={clearDataSearch}
                   end
                   to={URL.MESSAGE}
                   className={`block text-slate-200 hover:text-white truncate transition duration-150 ${
@@ -463,40 +467,6 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                         Messages
                       </span>
                     </div>
-                  </div>
-                </NavLink>
-              </li>
-              {/* Calendar */}
-              <li
-                className={`px-3 py-2 rounded-sm mb-0.5 last:mb-0 ${
-                  pathname.includes('calendar') && 'bg-slate-900'
-                }`}
-              >
-                <NavLink
-                  end
-                  to='/'
-                  className={`block text-slate-200 hover:text-white truncate transition duration-150 ${
-                    pathname.includes('calendar') && 'hover:text-slate-200'
-                  }`}
-                >
-                  <div className='flex items-center'>
-                    <svg className='shrink-0 h-6 w-6' viewBox='0 0 24 24'>
-                      <path
-                        className={`fill-current text-slate-600 ${
-                          pathname.includes('calendar') && 'text-indigo-500'
-                        }`}
-                        d='M1 3h22v20H1z'
-                      />
-                      <path
-                        className={`fill-current text-slate-400 ${
-                          pathname.includes('calendar') && 'text-indigo-300'
-                        }`}
-                        d='M21 3h2v4H1V3h2V1h4v2h10V1h4v2Z'
-                      />
-                    </svg>
-                    <span className='text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200'>
-                      Calendar
-                    </span>
                   </div>
                 </NavLink>
               </li>

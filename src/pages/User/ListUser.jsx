@@ -8,9 +8,13 @@ import { DEFAULT_PAGINATION_OBJECT } from '../../config/constants'
 import sessionState from '../../utils/sessionState'
 import CustomPagination from '../../components/Pagination'
 import { useDebouncedCallback } from '../../hooks/useDebouncedCallback'
+import Input from '../../components/Input'
+import { Transition } from '@headlessui/react'
+import { Button } from '../../components/Button'
+import { SearchForm } from '../../components/SearchForm'
 
 function ListUser() {
-  const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [showSearch, setShowSearch] = useState(false)
   const [loading, setLoading] = useState(true)
   const [users, setUsers] = useState([])
   const [pagination, setPagination] = useState(DEFAULT_PAGINATION_OBJECT)
@@ -74,18 +78,79 @@ function ListUser() {
     setDataSearch(dataTemp)
   }
 
+  const onChange = (e) => {
+    const dataTemp = { ...dataSearch, [e.target.name]: e.target.value }
+    setDataSearch(dataTemp)
+  }
+
+  const onSearch = () => {
+    debounceFn(dataSearch)
+  }
+
   return (
-    <div className='flex h-screen w-full overflow-hidden'>
+    <>
       <OverlaySpinner open={loading} />
       {/* Content area */}
       <div className='relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden'>
         {/*  Site header */}
-        <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-
         <main>
           <div className='px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto'>
+            <div className='flex flex-col items-center justify-center mb-5'>
+              <Button
+                onClick={() => {
+                  setShowSearch(!showSearch)
+                }}
+              >
+                Show
+              </Button>
+              <Transition show={showSearch}>
+                <Transition.Child
+                  enter='ease-out duration-300'
+                  enterFrom='opacity-0'
+                  enterTo='opacity-100'
+                  leave='ease-in duration-200'
+                  leaveFrom='opacity-100'
+                  leaveTo='opacity-0'
+                >
+                  <SearchForm onHandleSearch={onSearch}>
+                    <div className='grid grid-cols-2 gap-2 justify-around'>
+                      <Input
+                        type='text'
+                        label='User ID'
+                        value={dataSearch.id}
+                        name='id'
+                        onChange={onChange}
+                      />
+                      <Input
+                        type='text'
+                        value={dataSearch.username}
+                        label='Username'
+                        name='username'
+                        onChange={onChange}
+                      />
+                    </div>
+                    <div className='grid grid-cols-2 gap-2'>
+                      <Input
+                        type='text'
+                        label='User code'
+                        value={dataSearch.user_code}
+                        name='user_code'
+                        onChange={onChange}
+                      />
+                      <Input
+                        type='text'
+                        label='Name'
+                        value={dataSearch.name}
+                        name='name'
+                        onChange={onChange}
+                      />
+                    </div>
+                  </SearchForm>
+                </Transition.Child>
+              </Transition>
+            </div>
             <table className='w-full drop-shadow-lg text-sm text-left text-gray-500 dark:text-gray-400'>
-              <thead className='text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400'>
+              <thead className='text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400'>
                 <tr>
                   <th scope='col' className='py-3 px-6 text-center'>
                     #ID
@@ -184,7 +249,7 @@ function ListUser() {
           </div>
         </main>
       </div>
-    </div>
+    </>
   )
 }
 
