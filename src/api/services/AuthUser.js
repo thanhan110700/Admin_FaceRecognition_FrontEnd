@@ -16,8 +16,8 @@ export const register = async (payload) => {
   return data
 }
 
-export const getUser = async () => {
-  const { data } = await Http.get(`/users`)
+export const getUser = async (payload) => {
+  const { data } = await Http.get(`/users?${payload}`)
   return data
 }
 

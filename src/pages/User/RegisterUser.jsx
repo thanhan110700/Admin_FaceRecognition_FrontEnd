@@ -31,19 +31,19 @@ function RegisterUser() {
   })
   const departments = useMemo(
     () => [
-      { value: 1, name: 'Quản lý nhân sự' },
-      { value: 2, name: 'Chuyên viên tư vấn' },
-      { value: 3, name: 'Chuyên viên kinh doanh' },
-      { value: 4, name: 'Kỹ sư Công nghệ thông tin' },
+      { value: 1, name: 'Human Resource' },
+      { value: 2, name: 'Marketing' },
+      { value: 3, name: 'Sales' },
+      { value: 4, name: 'Information Technology' },
     ],
     []
   )
   const positions = useMemo(
     () => [
-      { value: 1, name: 'Giám đốc' },
-      { value: 2, name: 'Trưởng phòng' },
-      { value: 3, name: 'Phó phòng' },
-      { value: 4, name: 'Nhân viên' },
+      { value: 1, name: 'Director' },
+      { value: 2, name: 'Manager' },
+      { value: 3, name: 'Deputy' },
+      { value: 4, name: 'Employee' },
     ],
     []
   )
@@ -81,7 +81,7 @@ function RegisterUser() {
 
         <main>
           <div className='flex justify-center px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto'>
-            <div className='w-full max-w-lg bg-white shadow-lg p-5 rounded-md'>
+            <div className='w-full max-w-lg bg-white shadow-2xl p-5 rounded-md'>
               <label>
                 <div className='flex items-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5'>
                   <p className='text-center text-3xl font-semibold mx-4 mb-2'>

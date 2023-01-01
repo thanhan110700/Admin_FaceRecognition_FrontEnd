@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { toast } from 'react-hot-toast'
+import { AiFillNotification } from 'react-icons/ai'
 import { BiTimeFive } from 'react-icons/bi'
 import {
   getListNotification,
@@ -31,13 +32,12 @@ export const ItemCard = ({ className, setLoading }) => {
 
   const onClickItem = (id) => {
     updateNotificationRead(id, payload).then(({ data }) => {
-      console.log(data)
       setNotifications(data)
     })
   }
   return (
     <div className='flex justify-center'>
-      <div className='w-1/2'>
+      <div className='w-1/2 shadow-2xl rounded-md p-2'>
         <FilterButton setPayload={setPayload} />
         {notifications &&
           notifications.map((notification) => (
@@ -49,7 +49,10 @@ export const ItemCard = ({ className, setLoading }) => {
               }`}
             >
               <div className='flex items-center justify-between'>
-                <div className='font-semibold'>{notification.from}</div>
+                <div className='flex items-center font-semibold'>
+                  <AiFillNotification />
+                  {notification.from}
+                </div>
                 <div className='flex items-center'>
                   <BiTimeFive />
                   <p className='text-sm'>

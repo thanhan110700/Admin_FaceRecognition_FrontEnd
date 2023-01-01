@@ -4,21 +4,39 @@ import { deleteUser, getUser } from '../../api/services/AuthUser'
 import { OverlaySpinner } from '../../components/OverlaySpinner'
 import { AiFillDelete, AiFillSetting } from 'react-icons/ai'
 import { useNavigate } from 'react-router-dom'
+import { DEFAULT_PAGINATION_OBJECT } from '../../config/constants'
+import sessionState from '../../utils/sessionState'
+import CustomPagination from '../../components/Pagination'
+import { useDebouncedCallback } from '../../hooks/useDebouncedCallback'
 
 function ListUser() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [loading, setLoading] = useState(true)
   const [users, setUsers] = useState([])
+  const [pagination, setPagination] = useState(DEFAULT_PAGINATION_OBJECT)
+  const paramsSession = sessionState.getState('params')
+  const [dataSearch, setDataSearch] = useState(paramsSession || {})
+
   const navigate = useNavigate()
 
   useEffect(() => {
-    getData()
+    debounceFn()
   }, []) // triggered on route change
 
-  const getData = () => {
-    getUser()
+  const getData = (filterValue) => {
+    const searchParamsTemp = new URLSearchParams(filterValue || dataSearch)
+    sessionState.set('params', filterValue || dataSearch)
+    getUser(searchParamsTemp.toString())
       .then(({ data }) => {
-        setUsers(data)
+        setUsers(data.data)
+        setPagination({
+          currentPage: data.current_page,
+          lastPage: data.last_page,
+          totalPage: data.total,
+          perPage: data.per_page,
+          from: data.from,
+          to: data.to,
+        })
       })
       .catch((err) => {
         console.log(err)
@@ -27,6 +45,8 @@ function ListUser() {
         setLoading(false)
       })
   }
+
+  const debounceFn = useDebouncedCallback(getData)
 
   const handleDelete = (id) => {
     if (confirm(`Are you sure you want delete User with ID = ${id} ?`)) {
@@ -48,6 +68,12 @@ function ListUser() {
     navigate(`/user/${id}/edit`)
   }
 
+  const handleChangePage = (event, page) => {
+    const dataTemp = { ...dataSearch, page }
+    debounceFn(dataTemp)
+    setDataSearch(dataTemp)
+  }
+
   return (
     <div className='flex h-screen w-full overflow-hidden'>
       <OverlaySpinner open={loading} />
@@ -59,7 +85,7 @@ function ListUser() {
         <main>
           <div className='px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto'>
             <table className='w-full drop-shadow-lg text-sm text-left text-gray-500 dark:text-gray-400'>
-              <thead className='text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400'>
+              <thead className='text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400'>
                 <tr>
                   <th scope='col' className='py-3 px-6 text-center'>
                     #ID
@@ -102,7 +128,7 @@ function ListUser() {
                         key={user.id}
                         className='bg-white border-b dark:bg-gray-800 dark:border-gray-700'
                       >
-                        <th className='py-4 px-1 text-center'>{index + 1}</th>
+                        <th className='py-4 px-1 text-center'>{user.id}</th>
                         <td className='py-4 px-2 text-center'>
                           {user.username}
                         </td>
@@ -149,6 +175,12 @@ function ListUser() {
                   })}
               </tbody>
             </table>
+            <div className='flex justify-center'>
+              <CustomPagination
+                pagination={pagination}
+                handleChangePage={handleChangePage}
+              />
+            </div>
           </div>
         </main>
       </div>

@@ -70,7 +70,7 @@ export default function DetailAttendance() {
               </div>
             </div>
             <table className='w-full drop-shadow-lg text-sm text-left text-gray-500 dark:text-gray-400'>
-              <thead className='text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400'>
+              <thead className='text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400'>
                 <tr>
                   <th
                     scope='col'
@@ -83,6 +83,12 @@ export default function DetailAttendance() {
                     className='text-base font-medium  px-6 py-4 text-left'
                   >
                     Date
+                  </th>
+                  <th
+                    scope='col'
+                    className='text-base font-medium  px-6 py-4 text-left'
+                  >
+                    Image
                   </th>
                   <th
                     scope='col'
@@ -133,6 +139,9 @@ export default function DetailAttendance() {
                     <td className='px-6 py-4 whitespace-nowrap text-sm font-medium '>
                       {new Date(item.date).toLocaleDateString()}
                     </td>
+                    <td className='px-6 py-4 whitespace-nowrap text-sm font-medium '>
+                      <img src={item.image_face} alt='' className='w-20' />
+                    </td>
                     <td className='text-base  font-light px-6 py-4 whitespace-nowrap'>
                       {item.check_in &&
                         new Date(item.check_in).toLocaleTimeString()}
@@ -159,6 +168,7 @@ export default function DetailAttendance() {
                     Total
                   </td>
                   <td></td>
+                  <td></td>
                   <td className='px-6 py-4 whitespace-nowrap text-sm font-medium '>
                     {totalTime}
                   </td>
@@ -170,6 +180,7 @@ export default function DetailAttendance() {
                   <td className='px-6 py-4 whitespace-nowrap text-sm font-medium '>
                     Total Salary
                   </td>
+                  <td></td>
                   <td></td>
                   <td className='px-6 py-4 whitespace-nowrap text-sm font-medium '>
                     {new Intl.NumberFormat().format(parseInt(totalSalary))} VND

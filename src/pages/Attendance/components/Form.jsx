@@ -51,7 +51,7 @@ export default function Form({
       <div className='mt-10 sm:mt-0'>
         <div className='mt-5 md:col-span-3 md:mt-0'>
           <div className='overflow-hidden shadow sm:rounded-md'>
-            <div className='bg-gray-50 px-4 py-3 sm:px-6'>
+            <div className='bg-gray-200 px-4 py-3 sm:px-6'>
               <h4>Edit Attendance</h4>
             </div>
             <div className='bg-white px-4 py-5 sm:p-6'>
@@ -116,7 +116,7 @@ export default function Form({
                 </div>
               </div>
             </div>
-            <div className='bg-gray-50 px-4 py-3 text-right sm:px-6'>
+            <div className='bg-gray-200 px-4 py-3 text-right sm:px-6'>
               <button
                 className='inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'
                 onClick={handleUpdate}
