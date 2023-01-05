@@ -1,10 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import Header from '../../partials/Header'
 import { deleteUser, getUser } from '../../api/services/AuthUser'
 import { OverlaySpinner } from '../../components/OverlaySpinner'
 import { AiFillDelete, AiFillSetting } from 'react-icons/ai'
 import { useNavigate } from 'react-router-dom'
-import { DEFAULT_PAGINATION_OBJECT } from '../../config/constants'
+import {
+  DEFAULT_PAGINATION_OBJECT,
+  LIST_DEPARTMENT,
+  LIST_POSITION,
+  LIST_TRAININGS,
+} from '../../config/constants'
 import sessionState from '../../utils/sessionState'
 import CustomPagination from '../../components/Pagination'
 import { useDebouncedCallback } from '../../hooks/useDebouncedCallback'
@@ -12,6 +17,7 @@ import Input from '../../components/Input'
 import { Transition } from '@headlessui/react'
 import { Button } from '../../components/Button'
 import { SearchForm } from '../../components/SearchForm'
+import Select from '../../components/Select'
 
 function ListUser() {
   const [showSearch, setShowSearch] = useState(false)
@@ -87,6 +93,10 @@ function ListUser() {
     debounceFn(dataSearch)
   }
 
+  const departments = useMemo(() => LIST_DEPARTMENT, [])
+  const positions = useMemo(() => LIST_POSITION, [])
+  const trainings = useMemo(() => LIST_TRAININGS, [])
+
   return (
     <>
       <OverlaySpinner open={loading} />
@@ -143,6 +153,29 @@ function ListUser() {
                         value={dataSearch.name}
                         name='name'
                         onChange={onChange}
+                      />
+                    </div>
+                    <div className='grid grid-cols-3 gap-2'>
+                      <Select
+                        label='Position'
+                        value={dataSearch.position_id}
+                        name='position_id'
+                        data={[{ value: 0, name: 'All' }, ...positions]}
+                        onChange={(e) => onChange(e)}
+                      />
+                      <Select
+                        label='Department'
+                        value={dataSearch.department_id}
+                        name='department_id'
+                        data={[{ value: 0, name: 'All' }, ...departments]}
+                        onChange={(e) => onChange(e)}
+                      />
+                      <Select
+                        label='Training'
+                        value={dataSearch.is_training}
+                        name='is_training'
+                        data={[{ value: 2, name: 'All' }, ...trainings]}
+                        onChange={(e) => onChange(e)}
                       />
                     </div>
                   </SearchForm>

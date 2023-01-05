@@ -23,7 +23,6 @@ function Notifications() {
   // close on click outside
   useEffect(() => {
     const clickHandler = ({ target }) => {
-      getData()
       if (
         !dropdownOpen ||
         dropdown.current.contains(target) ||
@@ -45,7 +44,10 @@ function Notifications() {
     document.addEventListener('keydown', keyHandler)
     return () => document.removeEventListener('keydown', keyHandler)
   })
-
+  const onClick = () => {
+    getData()
+    setDropdownOpen(!dropdownOpen)
+  }
   return (
     <div className='relative inline-flex ml-3'>
       <button
@@ -54,7 +56,7 @@ function Notifications() {
           dropdownOpen && 'bg-slate-200'
         }`}
         aria-haspopup='true'
-        onClick={() => setDropdownOpen(!dropdownOpen)}
+        onClick={onClick}
         aria-expanded={dropdownOpen}
       >
         <span className='sr-only'>Notifications</span>

@@ -25,3 +25,22 @@ export const DEFAULT_PAGINATION_OBJECT = {
   from: FROM_PAGE,
   to: TO_PAGE,
 }
+
+export const LIST_POSITION = [
+  { value: 1, name: 'Director' },
+  { value: 2, name: 'Manager' },
+  { value: 3, name: 'Deputy' },
+  { value: 4, name: 'Employee' },
+]
+
+export const LIST_DEPARTMENT = [
+  { value: 1, name: 'Human Resource' },
+  { value: 2, name: 'Marketing' },
+  { value: 3, name: 'Sales' },
+  { value: 4, name: 'Information Technology' },
+]
+
+export const LIST_TRAININGS = [
+  { value: 0, name: 'Not Training' },
+  { value: 1, name: 'Training' },
+]

@@ -8,6 +8,7 @@ import { toast } from 'react-hot-toast'
 import get from 'lodash/get'
 import Select from '../../components/Select'
 import Input from '../../components/Input'
+import { LIST_DEPARTMENT, LIST_POSITION } from '../../config/constants'
 
 function EditUser() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
@@ -52,24 +53,8 @@ function EditUser() {
         setLoading(false)
       })
   }
-  const departments = useMemo(
-    () => [
-      { value: 1, name: 'Human Resource' },
-      { value: 2, name: 'Marketing' },
-      { value: 3, name: 'Sales' },
-      { value: 4, name: 'Information Technology' },
-    ],
-    []
-  )
-  const positions = useMemo(
-    () => [
-      { value: 1, name: 'Director' },
-      { value: 2, name: 'Manager' },
-      { value: 3, name: 'Deputy' },
-      { value: 4, name: 'Employee' },
-    ],
-    []
-  )
+  const departments = useMemo(() => LIST_DEPARTMENT, [])
+  const positions = useMemo(() => LIST_POSITION, [])
 
   const handleEdit = (e) => {
     setLoading(true)

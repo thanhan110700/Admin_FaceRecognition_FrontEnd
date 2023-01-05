@@ -10,9 +10,10 @@ export default function Select({
   className = '',
   disabled = false,
   required,
+  defaultValue = null,
 }) {
   return (
-    <>
+    <div>
       {label && (
         <label className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'>
           {label}
@@ -24,6 +25,7 @@ export default function Select({
           id={id}
           value={value}
           name={name}
+          defaultValue={defaultValue}
           onChange={(e) => onChange(e)}
           required={required}
           disabled={disabled}
@@ -36,6 +38,6 @@ export default function Select({
             ))}
         </select>
       </div>
-    </>
+    </div>
   )
 }

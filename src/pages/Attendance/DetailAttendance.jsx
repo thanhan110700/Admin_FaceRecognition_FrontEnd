@@ -9,12 +9,18 @@ import Header from '../../partials/Header'
 import Form from './components/Form'
 
 export default function DetailAttendance() {
-  const [sidebarOpen, setSidebarOpen] = useState(false)
   const [loading, setLoading] = useState(true)
   const [isOpen, setIsOpen] = useState(false)
   const { id } = useParams()
 
   const [attendances, setAttendances] = useState([])
+  const [user, setUser] = useState({
+    id: '',
+    name: '',
+    position: '',
+    department: '',
+    salary: '',
+  })
   const [dataUpdate, setDataUpdate] = useState({
     id: '',
     user_id: id,
@@ -26,14 +32,20 @@ export default function DetailAttendance() {
   const [payload, setPayload] = useState({
     month: new Date(),
   })
-  const navigate = useNavigate()
   const getData = () => {
     fetchAttendanceByUserId(id, payload)
       .then((res) => {
-        const { data, total_salary, total_time } = res
+        const { data, total_salary, total_time, user } = res
         setAttendances(data)
         setTotalTime(total_time)
         setTotalSalary(total_salary)
+        setUser({
+          id: user.id,
+          name: user.user_information.name,
+          position: user.user_information.position.name,
+          department: user.user_information.department.name,
+          salary: user.user_information.salary.salary,
+        })
       })
       .finally(() => setLoading(false))
   }
@@ -56,8 +68,18 @@ export default function DetailAttendance() {
         {/*  Site header */}
         <main>
           <div className='p-5'>
-            <div className='float-right mb-5'>
-              <div className='flex'>
+            <div className='flex justify-between mb-5'>
+              <div>
+                <h1 className='text-2xl font-semibold text-gray-600 dark:text-gray-300'>
+                  Detail Attendance
+                </h1>
+                <p className='text-sm text-gray-400 dark:text-gray-400'>
+                  {user.name} - {user.position} - {user.department} -
+                  {Intl.NumberFormat().format(parseInt(user.salary)) + ' VNĐ'}
+                  {}
+                </p>
+              </div>
+              <div className='flex flex-col'>
                 <label className='form-label inline-block'>Select Month</label>
                 <Input
                   type='month'
