@@ -145,8 +145,8 @@ export default function DetailAttendance() {
                         ...dataUpdate,
                         id: item.id,
                         date: item.date,
-                        check_in: item.check_in,
-                        check_out: item.check_out,
+                        check_in: item.check_in ?? item.date,
+                        check_out: item.check_out ?? item.date,
                         is_late: item.is_late,
                       })
                       setIsOpen(true)
@@ -163,11 +163,14 @@ export default function DetailAttendance() {
                       <img src={item.image_face} alt='' className='w-20' />
                     </td>
                     <td className='text-base  font-light px-6 py-4 whitespace-nowrap'>
-                      {item.check_in &&
-                        new Date(item.check_in).toLocaleTimeString()}
+                      {item.is_late == 3
+                        ? ''
+                        : new Date(item.check_in).toLocaleTimeString()}
                     </td>
                     <td className='text-base  font-light px-6 py-4 whitespace-nowrap'>
-                      {item.check_out
+                      {item.is_late == 3
+                        ? ''
+                        : item.check_out
                         ? new Date(item.check_out).toLocaleTimeString()
                         : item.check_in
                         ? 'Pending'

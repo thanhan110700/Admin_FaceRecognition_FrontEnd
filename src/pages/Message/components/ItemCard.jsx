@@ -51,7 +51,7 @@ export const ItemCard = ({ className, setLoading }) => {
               <div className='flex items-center justify-between'>
                 <div className='flex items-center font-semibold'>
                   <AiFillNotification />
-                  {notification.from}
+                  {notification.from} | {notification.username}
                 </div>
                 <div className='flex items-center'>
                   <BiTimeFive />

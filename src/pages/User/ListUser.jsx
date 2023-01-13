@@ -207,9 +207,6 @@ function ListUser() {
                     <span className='flex items-center'>POSITION</span>
                   </th>
                   <th scope='col' className='py-3 px-6'>
-                    <span className='flex items-center'>TOTAL AMOUNT</span>
-                  </th>
-                  <th scope='col' className='py-3 px-6'>
                     <span className='flex items-center'>SALARY</span>
                   </th>
                   <th scope='col' className='py-3 px-6'>
@@ -242,9 +239,6 @@ function ListUser() {
                         </td>
                         <td className='py-4 px-2 text-center'>
                           {user.position}
-                        </td>
-                        <td className='py-4 px-2 text-center'>
-                          {user.total_amount}
                         </td>
                         <td className='py-4 px-2 text-center'>{user.salary}</td>
                         <td className='py-4 px-2 text-center'>
